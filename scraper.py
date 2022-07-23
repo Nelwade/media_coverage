@@ -235,14 +235,16 @@ def check_write_csv(csv_sheet, article_count):
     """ If csv does not exist, it creates a new one and writes to it with a header
         If csv exists, it writes to csv without header """
     
+    destination = "data/" + csv_sheet
+
     def write_to_csv(df):
         df2 = pd.DataFrame(article_count)
         df = df.append(df2, ignore_index=True)
-        df.to_csv(csv_sheet, index=False)
+        df.to_csv(destination, index=False)
 
-    if os.path.exists(os.getcwd() + "/" + csv_sheet):
+    if os.path.exists(os.getcwd() + "/data/" + csv_sheet):
         # If csv already exists, append new dataframe and write to csv without header
-        df = pd.read_csv(csv_sheet)
+        df = pd.read_csv(destination)
         write_to_csv(df)
     else:
         df = pd.DataFrame()
@@ -342,9 +344,6 @@ def total_data():
 
     # df.to_csv("totals_data.csv", index=False)
 
-if __name__ == "__main__":
-    # nation_africa()
-    # std_media()
-    total_data()
+
 
     # check_write_csv("example.csv", {'date': [datetime.date(2022, 7, 19)], 'raila': [26], 'ruto': [25], 'karua': [9], 'rigathi': [11]})

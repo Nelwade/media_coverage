@@ -1,15 +1,5 @@
 from operator import add
-from plotly.tools import mpl_to_plotly
-from dash import dcc, html
-from dash_bootstrap_templates import load_figure_template
 
-import dash_bootstrap_components as dbc
-import dash
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import plotly.express as px
 import plotly.graph_objects as go
 import seaborn as sns
 
@@ -31,14 +21,6 @@ def plot_multibars(df_totals, df_nation, df_std):
     ruto = [nation_list[1], std_list[1], totals_list[1]]
     karua = [nation_list[2], std_list[2], totals_list[2]]
     rigathi = [nation_list[3], std_list[3], totals_list[3]]
-
-    
-
-    # print(df_totals)
-    # print(df_totals.values)
-
-    #print(raila, ruto, karua, rigathi)
-    #x_axis = np.arange(len(x_variables))
     
     def plot_individuals():
         fig=go.Figure(data=[
@@ -48,30 +30,12 @@ def plot_multibars(df_totals, df_nation, df_std):
             go.Bar(name="Rigathi Gachagua", x=x_variables, y=rigathi),
         ])
         fig.update_layout(
-            title="Number of Article Mentions Per Candidate Since July 15th",
+            title="Number of Article Mentions Per Candidate Since July 21st",
             barmode='group',
             xaxis_tickangle=-45,
             yaxis=dict(title="Number of Articles", titlefont_size=16, tickfont_size=14),
             xaxis=dict(title="Digital Media Website", titlefont_size=16, tickfont_size=14)
             )
-        
-        #fig.show()
-
-        # fig = plt.figure(figsize=(10,10))
-
-        # plt.bar(x_axis +0.2, raila, width=0.2, label="Raila Odinga")
-        # plt.bar(x_axis +0.2*2, ruto, width=0.2, label="William Ruto")
-        # plt.bar(x_axis +0.2*3, karua, width=0.2, label="Martha Karua")
-        # plt.bar(x_axis +0.2*4, rigathi, width=0.2, label="Rigathi Gachagua")
-
-        # plt.xlabel("Candidates", fontsize=12, fontweight='bold')
-        # plt.ylabel("Total Mentions", fontsize=12, fontweight='bold')
-        # plt.title("Mentions Per Candidate on Digital News Sites Since July 15th")
-
-        # #plt.xticks(x_axis, x_variables)
-        # plt.xticks(x_axis + 0.5, x_variables)
-        # plt.legend()
-        # #plt.show()
 
         return fig
 
@@ -84,26 +48,12 @@ def plot_multibars(df_totals, df_nation, df_std):
             go.Bar(name="Kenya Kwanza", x=x_variables, y=kenya_kwanza),
         ])
         fig.update_layout(
-            title="Number of Article Mentions of Per Party Since July 15th",
+            title="Number of Article Mentions of Per Party Since July 21st",
             barmode='group', 
             xaxis_tickangle=-45,
             yaxis=dict(title="Number of Articles", titlefont_size=16, tickfont_size=14),
             xaxis=dict(title="Digital Media Website", titlefont_size=16, tickfont_size=14)
             )
-        
-        #fig.show()
-
-        # fig = plt.figure(figsize=(4,4))
-        # plt.bar(x_axis +0.2, azimio, width=0.2, label="Azimio La Umoja")
-        # plt.bar(x_axis +0.2*2, kenya_kwanza, width=0.2, label="Kenya Kwanza")
-
-        # plt.xlabel("Party", fontsize=12, fontweight='bold')
-        # plt.ylabel("Total Mentions", fontsize=12, fontweight='bold')
-        # plt.title("Total Mentions Per Party on Digital News Sites Since July 15th")
-
-        # #plt.xticks(x_axis, x_variables)
-        # plt.xticks(x_axis + 0.3, x_variables)
-        # plt.legend()
         
         return fig
 

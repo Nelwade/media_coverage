@@ -6,7 +6,6 @@ from scraper import total_data
 import dash_bootstrap_components as dbc
 import dash
 import pandas as pd
-import time
 import datetime
 
 
@@ -26,6 +25,8 @@ load_figure_template("SKETCHY")
 print("Starting")
 total_data()
 
+now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+
 df_totals = pd.read_csv("data/totals_data.csv")
 df_nation = pd.read_csv("data/nat_data.csv")
 df_std = pd.read_csv("data/std_data.csv")
@@ -33,7 +34,6 @@ df_std = pd.read_csv("data/std_data.csv")
 
 fig1, fig2 = plot_multibars(df_totals, df_nation, df_std)
 
-now = datetime.datetime.now().strftime("%Y-%m-%d   %H:%M")
 app.layout= html.Div([
     html.H1("Tracking Digital Media Coverage of Presidential Candidates"),
     #html.H5("(Articles are counted from nation.africa and standardmedia.co.ke)"),
@@ -41,7 +41,7 @@ app.layout= html.Div([
     html.Br(),
     html.Br(),
     html.P("This website tracks, in real-time, the number of articles that mention each of the main presidential candidates and their running mates. The data is collected from nation.africa and standardmedia.co.ke."),
-    html.P("All data is recorded from 15th July 2022."),
+    html.P("All data is recorded from 21st July 2022."),
     dcc.Graph(id= 'graph', figure=fig1),
     html.Br(),
     html.Br(),

@@ -10,6 +10,8 @@ import datetime
 
 
 app = dash.Dash(external_stylesheets=[dbc.themes.SKETCHY])
+server = app.server
+
 load_figure_template("SKETCHY")
 
     # def countdown(t):

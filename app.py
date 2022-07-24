@@ -52,8 +52,8 @@ app.layout= html.Div([
     html.P("For any queries reach out through o.owadenelson@gmail.com.")
     ])
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
     # print("Starting......")
-app.run(debug=True, port=8010, host='localhost')
+    app.run(debug=True, port=8010, host='localhost')
     # print("Reloading in 30 secs.....")
     # time.sleep(20)

@@ -23,7 +23,7 @@ load_figure_template("SKETCHY")
     # while True:
 
 print("Starting")
-total_data()
+#total_data()
 
 now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 

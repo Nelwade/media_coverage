@@ -39,7 +39,7 @@ fig1, fig2 = plot_multibars(df_totals, df_nation, df_std)
 app.layout= html.Div([
     html.H1("Tracking Digital Media Coverage of Presidential Candidates"),
     #html.H5("(Articles are counted from nation.africa and standardmedia.co.ke)"),
-    html.Em(f"(Last Updated at : {now} GMT)"),
+    html.Em(f"(Last Updated at : {now})"),
     html.Br(),
     html.Br(),
     html.P("This website tracks, in real-time, the number of articles that mention each of the main presidential candidates and their running mates. The data is collected from nation.africa and standardmedia.co.ke."),

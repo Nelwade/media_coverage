@@ -303,7 +303,7 @@ def std_media():
 
     return std_article_count
 
-def total_data():
+def main():
     nation = nation_africa()
     std = std_media()
     
@@ -319,3 +319,6 @@ def total_data():
     csv_sheet = "totals_data.csv"
     
     check_write_csv(csv_sheet, all_article_count)
+
+if __name__ == "__main__":
+    main()

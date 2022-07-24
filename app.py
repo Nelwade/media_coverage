@@ -1,7 +1,6 @@
 from dash import dcc, html
 from dash_bootstrap_templates import load_figure_template
 from visualizer import plot_multibars
-from scraper import total_data
 
 import dash_bootstrap_components as dbc
 import dash

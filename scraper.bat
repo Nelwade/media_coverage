@@ -1,1 +1,1 @@
-"D:\Python projects\medeia_coverage\venv\Scripts\python.exe" "D:\Python projects\media_coverage\scraper.py"
+"D:\Python projects\media_coverage\venv\Scripts\python.exe" "D:\Python projects\media_coverage\scraper.py"

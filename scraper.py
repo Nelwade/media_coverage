@@ -1,26 +1,13 @@
-from selenium import webdriver
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 
-import chromedriver_autoinstaller
 import pandas as pd
 import datetime
 import os
 
-def launch_chromedriver():
-    chromedriver_autoinstaller.install() #automatically installs chromedriver and puts it in the path
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(chrome_options=options) 
-    return driver
-
 def launch_soup(html):
     soup = BeautifulSoup(html, "html.parser")
     return soup
-
-def get_pagesource(driver):
-    """returns the page html. For selenium"""
-    html = driver.page_source 
-    return html
 
 def url_req(link):
     """return the page html"""
@@ -38,15 +25,13 @@ def remove_blanks(article):
     return article
 
 def check_repeat_articles(candidate, article_title):
-    txtfile = os.getcwd() + "\\" + candidate + "_articles.txt"
+    txtfile = os.getcwd() + "\\data\\" + candidate + "_articles.txt"
             # print(txtfile)
             # creates a txt file of all article titles that have been counted
     with open(txtfile, "a+") as file:
         file.seek(0)
         # checks if article has been already counted before
         # if article is not in the txt file, it is counted and its title written 
-        #file_content = file.readlines()
-        #print(f"File content: {file_content}")
         if article_title.lower() not in file.read():
             file.write(article_title.lower())
             return True
@@ -70,22 +55,14 @@ def article_count_nat(candidate, link):
         article = article.text
         article = article.strip().split("\n")
 
-        # while True:
-        #     try:
-        #         article.remove("")
-        #     except:
-        #         break
-
         article = remove_blanks(article)
         
         # new line is added to the article title to improve readability when written to a text file later
         article_title = article[0] + "\n"
         article_date = article[-1]
 
-        #print(f"{article_title} {article_date}")
-
         # considers articles published after July 14th
-        if article_date == "Jul 14":
+        if article_date == "Jul 20":
             #print("Past due date")
             break
         elif check_repeat_articles(candidate, article_title):
@@ -114,8 +91,6 @@ def nat_articles(news_links):
 def article_count_std(candidate, link):
     """Counts articles in standard media and returns the total count for each candidate link"""
     
-    #html = url_req("https://www.standardmedia.co.ke/topic/raila-odinga")
-    #html = url_req("https://www.standardmedia.co.ke/topic/william-ruto")
     html = url_req(link)
     soup = launch_soup(html)
 
@@ -125,7 +100,7 @@ def article_count_std(candidate, link):
         today = str(datetime.date.today())
         
         # Counts article published after July 14th
-        initial_date = "2022-07-15"
+        initial_date = "2022-07-21"
         today = datetime.datetime.strptime(today, "%Y-%m-%d")
         initial_date = datetime.datetime.strptime(initial_date, "%Y-%m-%d")
         days = today - initial_date
@@ -235,14 +210,16 @@ def check_write_csv(csv_sheet, article_count):
     """ If csv does not exist, it creates a new one and writes to it with a header
         If csv exists, it writes to csv without header """
     
+    destination = "data/" + csv_sheet
+
     def write_to_csv(df):
         df2 = pd.DataFrame(article_count)
         df = df.append(df2, ignore_index=True)
-        df.to_csv(csv_sheet, index=False)
+        df.to_csv(destination, index=False)
 
-    if os.path.exists(os.getcwd() + "/" + csv_sheet):
+    if os.path.exists(os.getcwd() + "/data/" + csv_sheet):
         # If csv already exists, append new dataframe and write to csv without header
-        df = pd.read_csv(csv_sheet)
+        df = pd.read_csv(destination)
         write_to_csv(df)
     else:
         df = pd.DataFrame()
@@ -266,19 +243,6 @@ def nation_africa():
     
     check_write_csv(csv_sheet, nat_article_count)
 
-    # if os.path.exists(os.getcwd() + "/data.csv"):
-    #     #print("exists")
-    #     df = pd.read_csv("data.csv")
-    #     data_frame(nat_article_count, False, csv_sheet)
-    # else:
-    #     df = pd.DataFrame()
-    #     data_frame(nat_article_count, True, csv_sheet)
-
-    # df2 = pd.DataFrame(nat_article_count)
-    # df = df.append(df2, ignore_index=True)
-
-    # df.to_csv("data.csv", index=False)
-
     return nat_article_count
 
 def std_media():
@@ -299,22 +263,9 @@ def std_media():
     
     check_write_csv(csv_sheet, std_article_count)
 
-    # if os.path.exists(os.getcwd() + "/std_data.csv"):
-    #     #print("exists")
-    #     df = pd.read_csv("std_data.csv")
-    # else:
-    #     df = pd.DataFrame()
-    
-    # #df = pd.DataFrame()
-    # std_article_count = std_articles(news_links)
-    # df2 = pd.DataFrame(std_article_count)
-    # df = df.append(df2, ignore_index=True)
-
-    # df.to_csv("std_data.csv", index=False)
-
     return std_article_count
 
-def total_data():
+def main():
     nation = nation_africa()
     std = std_media()
     
@@ -330,21 +281,6 @@ def total_data():
     csv_sheet = "totals_data.csv"
     
     check_write_csv(csv_sheet, all_article_count)
-    
-    # if os.path.exists(os.getcwd() + "/totals_data.csv"):
-    #     #print("exists")
-    #     df = pd.read_csv("totals_data.csv")
-    # else:
-    #     df = pd.DataFrame()
-    
-    # df2 = pd.DataFrame(all_article_count)
-    # df = df.append(df2, ignore_index=True)
-
-    # df.to_csv("totals_data.csv", index=False)
 
 if __name__ == "__main__":
-    # nation_africa()
-    # std_media()
-    total_data()
-
-    # check_write_csv("example.csv", {'date': [datetime.date(2022, 7, 19)], 'raila': [26], 'ruto': [25], 'karua': [9], 'rigathi': [11]})
+    main()

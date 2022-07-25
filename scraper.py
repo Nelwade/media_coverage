@@ -32,8 +32,6 @@ def check_repeat_articles(candidate, article_title):
         file.seek(0)
         # checks if article has been already counted before
         # if article is not in the txt file, it is counted and its title written 
-        #file_content = file.readlines()
-        #print(f"File content: {file_content}")
         if article_title.lower() not in file.read():
             file.write(article_title.lower())
             return True
@@ -57,19 +55,11 @@ def article_count_nat(candidate, link):
         article = article.text
         article = article.strip().split("\n")
 
-        # while True:
-        #     try:
-        #         article.remove("")
-        #     except:
-        #         break
-
         article = remove_blanks(article)
         
         # new line is added to the article title to improve readability when written to a text file later
         article_title = article[0] + "\n"
         article_date = article[-1]
-
-        #print(f"{article_title} {article_date}")
 
         # considers articles published after July 14th
         if article_date == "Jul 20":
@@ -101,8 +91,6 @@ def nat_articles(news_links):
 def article_count_std(candidate, link):
     """Counts articles in standard media and returns the total count for each candidate link"""
     
-    #html = url_req("https://www.standardmedia.co.ke/topic/raila-odinga")
-    #html = url_req("https://www.standardmedia.co.ke/topic/william-ruto")
     html = url_req(link)
     soup = launch_soup(html)
 
@@ -255,19 +243,6 @@ def nation_africa():
     
     check_write_csv(csv_sheet, nat_article_count)
 
-    # if os.path.exists(os.getcwd() + "/data.csv"):
-    #     #print("exists")
-    #     df = pd.read_csv("data.csv")
-    #     data_frame(nat_article_count, False, csv_sheet)
-    # else:
-    #     df = pd.DataFrame()
-    #     data_frame(nat_article_count, True, csv_sheet)
-
-    # df2 = pd.DataFrame(nat_article_count)
-    # df = df.append(df2, ignore_index=True)
-
-    # df.to_csv("data.csv", index=False)
-
     return nat_article_count
 
 def std_media():
@@ -287,19 +262,6 @@ def std_media():
     print()
     
     check_write_csv(csv_sheet, std_article_count)
-
-    # if os.path.exists(os.getcwd() + "/std_data.csv"):
-    #     #print("exists")
-    #     df = pd.read_csv("std_data.csv")
-    # else:
-    #     df = pd.DataFrame()
-    
-    # #df = pd.DataFrame()
-    # std_article_count = std_articles(news_links)
-    # df2 = pd.DataFrame(std_article_count)
-    # df = df.append(df2, ignore_index=True)
-
-    # df.to_csv("std_data.csv", index=False)
 
     return std_article_count
 

@@ -14,18 +14,7 @@ server = app.server
 
 load_figure_template("SKETCHY")
 
-    # def countdown(t):
-    #     while t:
-    #         mins, secs = divmod(t, 60)
-    #         timer = '{:02d}:{:02d}'.format(mins, secs)
-    #         print(timer, end="\r")
-    #         time.sleep(1)
-    #         t -= 1
-
-    # while True:
-
 print("App Starting....")
-#total_data()
 
 now = datetime.datetime.now(pytz.timezone("Africa/Nairobi")).strftime("%Y-%m-%d %H:%M")
 
@@ -39,7 +28,7 @@ fig1, fig2 = plot_multibars(df_totals, df_nation, df_std)
 app.layout= html.Div([
     html.H1("Tracking Digital Media Coverage of Presidential Candidates"),
     #html.H5("(Articles are counted from nation.africa and standardmedia.co.ke)"),
-    html.Em(f"(Last Updated at : {now})"),
+    html.Em(f"(Last Updated at : {now} EAT)"),
     html.Br(),
     html.Br(),
     html.P("This website tracks, in real-time, the number of articles that mention each of the main presidential candidates and their running mates. The data is collected from nation.africa and standardmedia.co.ke."),
@@ -55,7 +44,4 @@ app.layout= html.Div([
     ])
 
 if __name__ == "__main__":
-    # print("Starting......")
     app.run(debug=True, port=8010, host='localhost')
-    # print("Reloading in 30 secs.....")
-    # time.sleep(20)

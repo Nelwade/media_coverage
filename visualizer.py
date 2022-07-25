@@ -48,7 +48,7 @@ def plot_multibars(df_totals, df_nation, df_std):
             go.Bar(name="Kenya Kwanza", x=x_variables, y=kenya_kwanza),
         ])
         fig.update_layout(
-            title="Number of Article Mentions of Per Party Since July 21st",
+            title="Number of Article Mentions Per Party Since July 21st",
             barmode='group', 
             xaxis_tickangle=-45,
             yaxis=dict(title="Number of Articles", titlefont_size=16, tickfont_size=14),

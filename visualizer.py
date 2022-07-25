@@ -34,7 +34,7 @@ def plot_multibars(df_totals, df_nation, df_std):
             barmode='group',
             xaxis_tickangle=-45,
             yaxis=dict(title="Number of Articles", titlefont_size=16, tickfont_size=14),
-            xaxis=dict(title="Digital Media Website", titlefont_size=16, tickfont_size=14)
+            xaxis=dict(title="Digital News Website", titlefont_size=16, tickfont_size=14)
             )
 
         return fig
@@ -52,7 +52,7 @@ def plot_multibars(df_totals, df_nation, df_std):
             barmode='group', 
             xaxis_tickangle=-45,
             yaxis=dict(title="Number of Articles", titlefont_size=16, tickfont_size=14),
-            xaxis=dict(title="Digital Media Website", titlefont_size=16, tickfont_size=14)
+            xaxis=dict(title="Digital News Website", titlefont_size=16, tickfont_size=14)
             )
         
         return fig

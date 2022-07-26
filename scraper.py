@@ -12,7 +12,7 @@ def launch_soup(html):
 def url_req(link):
     """return the page html"""
     x = Request(link, headers={'User-Agent': 'Mozilla/5.0'})
-    x = urlopen(x)
+    x = urlopen(x, timeout=30)
     html = x.read().decode()
     return html
 

@@ -48,7 +48,7 @@ content = html.Div([
 ])
 
 title = html.Title("Media Coverage of Kenya's Presidential Candidates")
-heading = html.H1("Tracking Digital News Media Coverage of Presidential Candidates", className="bg-primary text-white p-2")
+heading = html.H1("Tracking Digital News Media Coverage of Kenya's Presidential Candidates", className="bg-primary text-white p-2")
 
 footer = html.Div([
     html.Br(),

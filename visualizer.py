@@ -2,6 +2,8 @@ from operator import add
 
 import plotly.graph_objects as go
 import seaborn as sns
+import pandas as pd
+import plotly.express as px
 
 sns.set_style("darkgrid")
 
@@ -61,5 +63,37 @@ def plot_multibars(df_totals, df_nation, df_std):
     fig2 = plot_parties()
     
     return fig1, fig2
+
+def line_graph(df, media_house):
+    #df = pd.read_csv("data/totals_data.csv", index_col="date")
+
+    # split the dataframe into a dictionary of dataframes with dates as the key
+    res = dict(tuple(df.groupby("date")))
+    #print(res)
+
+    new_dict={}
+    for k, v in res.items():
+        if k != "2022-07-23":
+            df_totals = v.sum(numeric_only=True)
+            #print(datetime.datetime.fromtimestamp(k))
+            # print(df_totals.values)
+            new_dict[k] = df_totals.values
+    #print(new_dict)
+    df2 =pd.DataFrame(new_dict, index=["Raila Odinga", "William Ruto", "Martha Karua", "Rigathi Gachagua"])
+    df3= df2.transpose()
+    df3["Azimio La Umoja"] = df3["Raila Odinga"] + df3["Martha Karua"]
+    df3["Kenya Kwanza"] = df3["William Ruto"] + df3["Rigathi Gachagua"]
+
+
+    fig = px.line(df3, x=df3.index, y=df3.columns, markers=True)
+    fig.update_layout(
+                title=f"Daily Change in the Number of Article Mentions {media_house}",
+                #xaxis_tickangle=-45,
+                yaxis=dict(title="Number of Articles", titlefont_size=16, tickfont_size=14),
+                xaxis=dict(title="Date", titlefont_size=16, tickfont_size=14)
+                )
+    #fig.show()
+
+    return fig
 
 

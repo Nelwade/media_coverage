@@ -1,7 +1,6 @@
 from dash import dcc, html
 from dash_bootstrap_templates import load_figure_template
-from visualizer import plot_multibars
-from new_graphs import line_graph
+from visualizer import plot_multibars, line_graph
 
 import dash_bootstrap_components as dbc
 import dash

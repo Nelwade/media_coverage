@@ -1,6 +1,7 @@
 from dash import dcc, html
 from dash_bootstrap_templates import load_figure_template
 from visualizer import plot_multibars
+from new_graphs import line_graph
 
 import dash_bootstrap_components as dbc
 import dash
@@ -26,6 +27,9 @@ df_std = pd.read_csv("data/std_data.csv")
 
 
 fig1, fig2 = plot_multibars(df_totals, df_nation, df_std)
+fig3 = line_graph(df_nation, "Nation Africa")
+fig4 =  line_graph(df_std, "Standard Media")
+fig5 = line_graph(df_totals, "Totals")
 
 graphs = html.Div(
     [
@@ -36,7 +40,20 @@ graphs = html.Div(
             ],
             className="mt-4",
         ),
-       
+        html.Br(),
+        html.Hr(),
+        html.Br(),
+        dbc.Row(
+            [
+                dbc.Col(dcc.Graph(figure=fig3), lg=6),
+                dbc.Col(dcc.Graph(figure=fig4), lg=6),
+            ],
+            className="mt-4",
+        ),
+        html.Br(),
+        html.Hr(),
+        html.Br(),
+        dcc.Graph(figure=fig5)
     ]
 )
 
@@ -47,6 +64,7 @@ date = html.Div([
 content = html.Div([
     html.Br(),
     html.P("This website tracks the number of news articles that mention each of the main presidential candidates and their running mates. The data is collected from nation.africa and standardmedia.co.ke. All data is recorded from 21st July 2022."),
+    html.Hr()
 ])
 
 title = html.Title("Media Coverage of Kenya's Presidential Candidates")
@@ -54,6 +72,7 @@ heading = html.H1("Tracking Digital News Media Coverage of Kenya's Presidential 
 
 footer = html.Div([
     html.Br(),
+    html.Hr(),
     html.Footer("Contact: o.owadenelson@gmail.com")
 ])
 

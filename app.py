@@ -7,7 +7,7 @@ import dash
 import pandas as pd
 import datetime
 import pytz
-
+import os
 
 app = dash.Dash(external_stylesheets=[dbc.themes.SKETCHY])
 server = app.server
@@ -16,7 +16,9 @@ load_figure_template("SKETCHY")
 
 print("App Starting....")
 
-now = datetime.datetime.now(pytz.timezone("Africa/Nairobi")).strftime("%Y-%m-%d %H:%M")
+last_updated = os.path.getmtime("data/totals_data.csv")
+last_updated = datetime.datetime.fromtimestamp(last_updated, pytz.timezone("Africa/Nairobi")).strftime("%Y-%m-%d %H:%M")
+#now = datetime.datetime.now(pytz.timezone("Africa/Nairobi")).strftime("%Y-%m-%d %H:%M")
 
 df_totals = pd.read_csv("data/totals_data.csv")
 df_nation = pd.read_csv("data/nat_data.csv")
@@ -39,7 +41,7 @@ graphs = html.Div(
 )
 
 date = html.Div([
-    html.Em(f"(Last Updated at : {now} EAT)"),
+    html.Em(f"(Last Updated at : {last_updated} EAT)"),
 ])
 
 content = html.Div([

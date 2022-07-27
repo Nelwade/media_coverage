@@ -154,3 +154,4 @@ cython_debug/
 #.idea/
 scraper.bat
 demo.py
+new_graphs.py

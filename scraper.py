@@ -1,3 +1,4 @@
+from urllib.error import URLError
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 
@@ -266,8 +267,24 @@ def std_media():
     return std_article_count
 
 def main():
-    nation = nation_africa()
-    std = std_media()
+    
+    def error_handle(function):
+        """Handle errors arising from network issues"""
+        try:
+            result = function()
+        except Exception as e:
+            print(e)
+            result = {
+                "date": datetime.date.today(),
+                "raila": [0],
+                "ruto": [0],
+                "karua": [0],
+                "rigathi": [0],
+            }
+        return result
+
+    nation = error_handle(nation_africa)
+    std = error_handle(std_media)
     
     all_article_count = {}
     for key in std:

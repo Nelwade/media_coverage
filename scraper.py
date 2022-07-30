@@ -86,7 +86,14 @@ def nat_articles(news_links):
     return new_row
 
 
-
+def no_zeros(count):
+    """Make sures that rows with all zeros are not written to csv"""
+    list1 = list(count.values())
+    # Only write to the csv file if the total count is more than zero
+    if sum(sum(i) for i in list1[1:]) > 0:
+        return True
+    else:
+        return False
 
 
 def article_count_std(candidate, link):
@@ -238,11 +245,13 @@ def nation_africa():
     }
     
     nat_article_count = nat_articles(news_links)
-    print(nat_article_count)
+    print("Nation Africa Count: ", nat_article_count)
     print()
-    csv_sheet = "nat_data.csv"
-    
-    check_write_csv(csv_sheet, nat_article_count)
+
+    # Only write to the csv file if the total count is more than zero
+    if no_zeros(nat_article_count):
+        csv_sheet = "nat_data.csv"
+        check_write_csv(csv_sheet, nat_article_count)
 
     return nat_article_count
 
@@ -258,11 +267,13 @@ def std_media():
     }
 
     std_article_count = std_articles(news_links)
-    csv_sheet = "std_data.csv"
-    print(std_article_count)
+    print("Standard Media Count: ", std_article_count)
     print()
     
-    check_write_csv(csv_sheet, std_article_count)
+    # Only write to the csv file if the total count is more than zero
+    if no_zeros(std_article_count):
+        csv_sheet = "std_data.csv"
+        check_write_csv(csv_sheet, std_article_count)
 
     return std_article_count
 
@@ -294,10 +305,12 @@ def main():
             else:
                 all_article_count[key] = [std[key][0] + nation[key][0]]
 
-    print(all_article_count)
-    csv_sheet = "totals_data.csv"
-    
-    check_write_csv(csv_sheet, all_article_count)
+    print("Total Count: ", all_article_count)
+
+    # Only write to the csv file if the total count is more than zero
+    if no_zeros(all_article_count):
+        csv_sheet = "totals_data.csv"
+        check_write_csv(csv_sheet, all_article_count)
 
 if __name__ == "__main__":
     main()

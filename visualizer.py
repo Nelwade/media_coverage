@@ -32,7 +32,7 @@ def plot_multibars(df_totals, df_nation, df_std):
             go.Bar(name="Rigathi Gachagua", x=x_variables, y=rigathi),
         ])
         fig.update_layout(
-            title="Number of Article Mentions Per Candidate Since July 21st",
+            title="Number of Article Mentions Per Candidate",
             barmode='group',
             xaxis_tickangle=-45,
             yaxis=dict(title="Number of Articles", titlefont_size=16, tickfont_size=14),
@@ -50,7 +50,7 @@ def plot_multibars(df_totals, df_nation, df_std):
             go.Bar(name="Kenya Kwanza", x=x_variables, y=kenya_kwanza),
         ])
         fig.update_layout(
-            title="Number of Article Mentions Per Party Since July 21st",
+            title="Number of Article Mentions Per Party",
             barmode='group', 
             xaxis_tickangle=-45,
             yaxis=dict(title="Number of Articles", titlefont_size=16, tickfont_size=14),
@@ -87,7 +87,7 @@ def line_graph(df, media_house):
 
     fig = px.line(df3, x=df3.index, y=df3.columns, markers=True)
     fig.update_layout(
-                title=f"Daily Change in the Number of Article Mentions {media_house}",
+                title=f"Daily Changes in Article Mentions ({media_house})",
                 #xaxis_tickangle=-45,
                 yaxis=dict(title="Number of Articles", titlefont_size=16, tickfont_size=14),
                 xaxis=dict(title="Date", titlefont_size=16, tickfont_size=14)

@@ -81,7 +81,11 @@ def nat_articles(news_links):
 
     for candidate, link in news_links.items():    
         #print(f"Counting {candidate}............")
-        new_row[candidate] = [article_count_nat(candidate, link)]
+        try:
+            new_row[candidate] = [article_count_nat(candidate, link)]
+        except Exception as e:
+            print(link, e)
+            new_row[candidate] = [0]
     
     return new_row
 
@@ -207,7 +211,11 @@ def std_articles(news_links):
 
     for candidate, link in news_links.items():    
         #print(f"Counting {candidate}............")
-        new_row[candidate] = [article_count_std(candidate, link)]
+        try:
+            new_row[candidate] = [article_count_std(candidate, link)]
+        except Exception as e:
+            print(link, e)
+            new_row[candidate] = [0]
     
     return new_row
 
@@ -279,23 +287,23 @@ def std_media():
 
 def main():
     
-    def error_handle(function):
-        """Handle errors arising from network issues"""
-        try:
-            result = function()
-        except Exception as e:
-            print(e)
-            result = {
-                "date": datetime.date.today(),
-                "raila": [0],
-                "ruto": [0],
-                "karua": [0],
-                "rigathi": [0],
-            }
-        return result
+    # def error_handle(function):
+    #     """Handle errors arising from network issues"""
+    #     try:
+    #         result = function()
+    #     except Exception as e:
+    #         print(e)
+    #         result = {
+    #             "date": datetime.date.today(),
+    #             "raila": [0],
+    #             "ruto": [0],
+    #             "karua": [0],
+    #             "rigathi": [0],
+    #         }
+    #     return result
 
-    nation = error_handle(nation_africa)
-    std = error_handle(std_media)
+    nation = nation_africa()
+    std = std_media()
     
     all_article_count = {}
     for key in std:

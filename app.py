@@ -54,6 +54,8 @@ app.index_string = """<!DOCTYPE html>
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-MMPZZVX');</script>
         <!-- End Google Tag Manager -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1792676010155720"
+        crossorigin="anonymous"></script>
         {%metas%}
         <title>Media Coverage of Kenya's Presidential Candidates</title>
         {%favicon%}

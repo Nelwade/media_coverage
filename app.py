@@ -1,6 +1,7 @@
 from dash import dcc, html
 from dash_bootstrap_templates import load_figure_template
 from visualizer import plot_multibars, line_graph
+from scraper import main
 
 import dash_bootstrap_components as dbc
 import dash
@@ -15,6 +16,7 @@ server = app.server
 load_figure_template("SKETCHY")
 
 print("App Starting....")
+main()
 
 last_updated = os.path.getmtime("data/totals_data.csv")
 last_updated = datetime.datetime.fromtimestamp(last_updated, pytz.timezone("Africa/Nairobi")).strftime("%Y-%m-%d %H:%M")

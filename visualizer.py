@@ -121,7 +121,7 @@ def line_graph2(df, media_house):
     # Turn dates back to indexs (Is unnecessary)
     df4 = df3.transpose()
 
-    fig = px.line(df4, x=df4.index, y=df4.columns, markers=True)
+    fig = px.line(df4, x=df4.index, y=df4.columns, markers=True, color_discrete_sequence=px.colors.qualitative.G10)
     fig.update_layout(
                 title=f"Daily Changes in the Number of Article Mentions {media_house}",
                 #xaxis_tickangle=-45,

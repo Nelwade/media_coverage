@@ -65,7 +65,7 @@ def plot_multibars(df_totals, df_nation, df_std):
     return fig1, fig2
 
 def line_graph(df, media_house):
-    #df = pd.read_csv("data/totals_data.csv", index_col="date")
+    """Plots a line graph of date against the total number of mentions for that particular date"""
 
     # split the dataframe into a dictionary of dataframes with dates as the key
     res = dict(tuple(df.groupby("date")))
@@ -97,3 +97,36 @@ def line_graph(df, media_house):
     return fig
 
 
+def line_graph2(df, media_house):
+    """Plots a line graph of date against the total number of mentions since counting began"""
+
+    # rename the column names
+    df.columns = ["date", "Raila Odinga", "William Ruto", "Martha Karua", "Rigathi Gachagua"]
+
+    # create new columns for each party
+    df["Azimio La Umoja"] = df["Raila Odinga"] + df["Martha Karua"]
+    df["Kenya Kwanza"] = df["William Ruto"] + df["Rigathi Gachagua"]
+    
+    # get the totals
+    df2 = df.groupby("date").sum()
+
+    # turn dates to columns
+    df3 = df2.transpose()
+
+    # Add the totals of previous column to the current column
+    for index, column in enumerate(df3.columns):
+        if index != 0:
+            df3[column] = df3[column] + df3[df3.columns[index-1]]
+
+    # Turn dates back to indexs (Is unnecessary)
+    df4 = df3.transpose()
+
+    fig = px.line(df4, x=df4.index, y=df4.columns, markers=True)
+    fig.update_layout(
+                title=f"Daily Changes in the Number of Article Mentions {media_house}",
+                #xaxis_tickangle=-45,
+                yaxis=dict(title="Number of Articles", titlefont_size=16, tickfont_size=14),
+                xaxis=dict(title="Date", titlefont_size=16, tickfont_size=14)
+                )
+
+    return fig

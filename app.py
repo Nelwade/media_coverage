@@ -1,6 +1,6 @@
 from dash import dcc, html
 from dash_bootstrap_templates import load_figure_template
-from visualizer import plot_multibars, line_graph
+from visualizer import plot_multibars, line_graph2
 from scraper import main
 
 import dash_bootstrap_components as dbc
@@ -13,10 +13,10 @@ import os
 app = dash.Dash(external_stylesheets=[dbc.themes.SKETCHY])
 server = app.server
 
-load_figure_template("SKETCHY")
+#load_figure_template("SKETCHY")
 
 print("App Starting....")
-main()
+#main()
 
 last_updated = os.path.getmtime("data/totals_data.csv")
 last_updated = datetime.datetime.fromtimestamp(last_updated, pytz.timezone("Africa/Nairobi")).strftime("%Y-%m-%d %H:%M")
@@ -28,9 +28,9 @@ df_std = pd.read_csv("data/std_data.csv")
 
 
 fig1, fig2 = plot_multibars(df_totals, df_nation, df_std)
-fig3 = line_graph(df_nation, "Nation Africa")
-fig4 =  line_graph(df_std, "Standard Media")
-fig5 = line_graph(df_totals, "Totals")
+fig3 = line_graph2(df_nation, "Nation Africa")
+fig4 =  line_graph2(df_std, "Standard Media")
+fig5 = line_graph2(df_totals, "Totals")
 
 # app.html_layout = """<!DOCTYPE html>
 # <html>

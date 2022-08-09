@@ -125,7 +125,7 @@ def line_graph2(df, media_house):
     fig.update_layout(
                 title=f"Daily Changes in the Number of Article Mentions {media_house}",
                 #xaxis_tickangle=-45,
-                yaxis=dict(title="Number of Articles", titlefont_size=16, tickfont_size=14),
+                yaxis=dict(title=f"Number of Articles: {media_house}", titlefont_size=16, tickfont_size=14),
                 xaxis=dict(title="Date", titlefont_size=16, tickfont_size=14)
                 )
 
